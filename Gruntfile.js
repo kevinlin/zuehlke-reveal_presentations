@@ -107,10 +107,12 @@ module.exports = function(grunt) {
 				src: [
 					'index.html',
 					'css/**',
+					'img/**',
 					'js/**',
 					'lib/**',
 					'images/**',
 					'plugin/**',
+					'slides/**',
 					'**.md'
 				],
 				dest: 'reveal-js-presentation.zip'
@@ -136,7 +138,7 @@ module.exports = function(grunt) {
 				tasks: 'css-core'
 			},
 			html: {
-				files: root.map(path => path + '/*.html')
+				files: [root.map(path => path + '/*.html'), 'slides/*.html']
 			},
 			markdown: {
 				files: root.map(path => path + '/*.md')
@@ -164,7 +166,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-retire' );
 	grunt.loadNpmTasks( 'grunt-sass' );
 	grunt.loadNpmTasks( 'grunt-zip' );
-	
+
 	// Default task
 	grunt.registerTask( 'default', [ 'css', 'js' ] );
 
