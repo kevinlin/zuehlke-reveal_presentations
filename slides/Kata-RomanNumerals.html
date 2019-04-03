@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>01 Intro | Example Content</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/atom-one-dark.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Kata - Roman Numerals
+                <small>by <span class="nowrap">Kevin Lin</span></small>
+            </h1>
+        </section>
+        <section>
+            <h2>About me</h2>
+            <div class="column-container">
+                <div class="column-2">
+                    <img src="../img/keli.jpg" class="portrait" alt="Kevin photo">
+                    <h3 class="margin-top">Kevin Lin</h3>
+                </div>
+                <!--<div class="column-2">-->
+                <!--<img src="../img/nioe.jpg" class="portrait">-->
+                <!--<h3 class="margin-top">Nicolas Oeschger</h3>-->
+                <!--</div>-->
+            </div>
+            <p>Software Engineer working for Zühlke since 2017</p>
+        </section>
+        <section>
+            <h2>Schedule</h2>
+            <ul>
+                <li>17:30 - 18:00 Introduction</li>
+                <li>18:00 - 19:30 Cracking code, order pizza from <a href="http://www.spizza.sg/">Spizza</a></li>
+                <li>19:30 - 20:00 Break for dinner</li>
+                <li>20:00 - 20:30 Complete the exercise</li>
+                <li>20:00 - 21:00 Present solutions and recap</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Rules</h2>
+            <ol>
+                <li>Work in <span class="warn">pairs</span></li>
+                <li>Choose your <span class="warn">language of preference</span></li>
+                <li>Follow <span class="warn">TDD</span></li>
+                <li>Prepare to <span class="warn">demo</span> at the end</li>
+            </ol>
+        </section>
+        <section>
+            <h2>Problem Description</h2>
+            <ul>
+                <li>Implement a function to convert from Roman Numerals string to normal (Arabic) numbers</li>
+                <li>
+                    <ul>
+                        <li>"I" -> 1</li>
+                        <li>"X" -> 10</li>
+                        <li>"VII" -> 7</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Roman Numerals</h2>
+                <h3>Background</h3>
+                <p>The Romans were active in trade and commerce, and from the time of learning to write they needed a way to indicate numbers.
+                </p>
+                <p>The system they developed lasted many centuries, and still sees some specialized use today. For example the BBC uses Roman numerals to date their programmes.</p>
+            </section>
+            <section>
+                <h2>Roman Numerals</h2>
+                <h3>Basics</h3>
+                <table class="wikitable">
+                    <tbody>
+                    <tr>
+                        <th>Symbol</th>
+                        <td><a href="#" title="I"><span class="times-serif" title="Roman numeral">I</span></a></td>
+                        <td><a href="#" title="V"><span class="times-serif" title="Roman numeral">V</span></a></td>
+                        <td><a href="#" title="X"><span class="times-serif" title="Roman numeral">X</span></a></td>
+                        <td><a href="#" title="L"><span class="times-serif" title="Roman numeral">L</span></a></td>
+                        <td><a href="#" title="C"><span class="times-serif" title="Roman numeral">C</span></a></td>
+                        <td><a href="#" title="D"><span class="times-serif" title="Roman numeral">D</span></a></td>
+                        <td><a href="#" title="M"><span class="times-serif" title="Roman numeral">M</span></a></td>
+                    </tr>
+                    <tr>
+                        <th>Value</th>
+                        <td>1</td>
+                        <td>5</td>
+                        <td>10</td>
+                        <td>50</td>
+                        <td>100</td>
+                        <td>500</td>
+                        <td>1,000</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Roman Numerals</h2>
+                <h3>Basic Rules</h3>
+                <ul>
+                    <li>Generally, symbols are placed in order of value, starting with the largest values. When smaller values precede larger values, the smaller values are subtracted from the larger
+                        values, and the result is added to the total.
+                    </li>
+                    <li>Small-value symbol may be subtracted from any large-value symbol when placed on the left: IV - 4</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Roman Numerals</h2>
+                <h3>Additional Rules</h3>
+                <ul>
+                    <li>The symbols “I”, “X”, “C”, and “M” can be repeated three times in succession, but no more.</li>
+                    <li>“I” can be subtracted from “V” and “X” only.</li>
+                    <li>“X” can be subtracted from “L” and “C” only.</li>
+                    <li>“C” can be subtracted from “D” and “M” only.</li>
+                    <li>“V”, “L”, and “D” can never be repeated or subtracted.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Roman Numerals</h2>
+                <h3>Additional Rules (cont')</h3>
+                <ul>
+                    <li>A number written in Arabic numerals can be broken into digits.</li>
+                    <li>For example, 1903 is composed of 1 (one thousand), 9 (nine hundreds), 0 (zero tens), and 3 (three units). To write the Roman numerals, each of the nonzero digits should be
+                        treated separately.
+                    </li>
+                    <li>In the above example, 1,000 = M, 900 = CM, and 3 = III. Therefore, 1903 = M CM III.</li>
+                </ul>
+            </section>
+        </section>
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>
