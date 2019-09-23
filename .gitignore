@@ -7,3 +7,7 @@
 
 # Node
 node_modules
+
+# Grunt build files
+/js/reveal.min.js
+/css/reveal.min.css
