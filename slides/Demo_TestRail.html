@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>01 Intro | Example Content</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/atom-one-dark.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h2>Demo on Discover API testing <br>
+                and TestRail integration</h2>
+        </section>
+        <section>
+            <h2>About me</h2>
+            <div class="column-container">
+                <div class="column-2">
+                    <img src="../img/keli.jpg" class="portrait" alt="Kevin photo">
+                    <h3 class="margin-top">Kevin Lin</h3>
+                </div>
+            </div>
+            <p>Senior software engineer expertise on Java enterprise applications and front-end development</p>
+        </section>
+        <section>
+            <section>
+                <h2>What I am going to demo today</h2>
+                <ul>
+                    <li>TestRail test cases under Discover API suite</li>
+                    <li>Completed Test case written in JavaScript</li>
+                    <li>End-to-end test exuction and integration with TestRail</li>
+                    <li>Question any time</li>
+                </ul>
+            </section>
+            <section>
+                <h2>My approach for the POC</h2>
+                <ul>
+                    <li>Timeboxed task - 2 days</li>
+                    <li>Translate a test case from Postman to TestRail</li>
+                    <li>Reference the test code under: <a href="https://github.com/HOOQTV/HOOQ_QA_Cigniti">HOOQ_QA_Cigniti</a></li>
+                    <li>Test need to be able to run manually and integrate with Jenkins</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Resources</h2>
+                <ul>
+                    <li>Test Rail Suite: <a href="https://hooqtv.testrail.net/index.php?/suites/view/168" target="_blank">https://hooqtv.testrail.net/index.php?/suites/view/168</a></li>
+                    <li>Pull Request of the POC: <a>https://github.com/HOOQTV/discover/pull/534</a></li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Test Case for Discover API</h2>
+                <p>Postman test alMakes it easy to check whether a variable is present:</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    curl -X GET \
+                      'https://discover-nightly.hooq.tv/v1.6/discover/feed?region=SG&userAccessLevel=10&platform=BIGTV&perPage=50&page=1' \
+                      -H 'Postman-Token: 7f69ab55-1cd4-4458-8324-576af2ec4a7a' \
+                      -H 'X-UUID-Auth: RjYJ2hQ9XRAKpkQScnuNg96MakLFqjV6dwE5D74sNeN2qeJts4Ry3yWNvyjJtQEw' \
+                      -H 'cache-control: no-cache'
+                </code>
+            </pre>
+            </section>
+            <section>
+                <p>Assert the response JSON for a certain node/property</p>
+                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        {
+                        "data": [
+                        {
+                        "row_id": "84f8f3ef-e438-451c-a450-abe9c35550e5",
+                        "row_name": null,
+                        "region": "SG",
+                        "order": 1,
+                        "type": "Multi-Title-Spotlight-Free",
+                        "obj_id": null,
+                        "meta": {},
+                        "data": [
+                        {
+                        "id": "5ce26519-3895-4ee0-ae5c-d2ad7de7e76f",
+                        "title": "Liverpool vs Norwich City - 10 Aug 2019",
+                        "as": "MOVIE",
+                        "region": "SG",
+                        "images": [
+                        {
+                        "id": "f81fdedc-15dd-4aaf-8c1b-8a0d5f83348a",
+                        "md5": "fc7a9d4412af2f20eb369c1804165d6d",
+                        "url": "https://commodusprod.hooq.tv/cdnimagesprod/titles/2318610/POSTER/1565456047-983fe488aa635036d2ab274a5e130b36553a2c2b.jpg?",
+                        "type": "POSTER",
+                        "owner": "TITLE",
+                        "storage": "COMMODUS",
+                        "owner_id": "5ce26519-3895-4ee0-ae5c-d2ad7de7e76f"
+                        ...
+                    </code>
+                </code>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Live Demo</h2>
+            </section>
+        </section>
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>
