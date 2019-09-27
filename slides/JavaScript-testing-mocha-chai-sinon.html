@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>JavaScript Testing with Mocha, Chai, Sinon</title>
+
+    <link rel="icon" href="../img/hooq_icon.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/atom-one-dark.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>JavaScript Testing with <br><small>Mocha, Chai, Sinon</small></h1>
+            <p>Prepared by Kevin and the Discover Team</p>
+        </section>
+        <section>
+            <h2>General rules of thumbs</h2>
+            <blockquote>#1. A unit test should only fail for a single reason, namely, the application logic under test does not behave as expected.</blockquote>
+            <blockquote>#3. During stubbing/mocking, mock data should contain the minimal amount of data that is required to pass the test.</blockquote>
+        </section>
+        <section>
+            <!-- Libraries and tooling -->
+            <section>
+                <h2>Libraries we use <br><small>for Discover Testing</small></h2>
+                <div class="column-container">
+                    <div class="column-1">
+                        <img src="../img/mocha.svg" height="200">
+                        <h3 class="margin-top">Mocha</h3>
+                        <p><small>Testing framework / test runner</small></p>
+                    </div>
+                    <div class="column-1">
+                        <img src="../img/chai.png" height="200">
+                        <h3 class="margin-top">Chai</h3>
+                        <p><small>BDD / TDD assertions</small></p>
+                    </div>
+                    <div class="column-1">
+                        <img src="../img/sinon.png" height="200">
+                        <h3 class="margin-top">Sinon.js</h3>
+                        <p><small>Stubbing, mocking</small></p>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Alternatives to Mocha</h2>
+                <div class="column-container">
+                    <div class="column-1">
+                        <img src="../img/jest.jpg" height="200">
+                        <h3 class="margin-top">Jest</h3>
+                        <p><small>By Facebook, zero-config, support snapshot</small></p>
+                    </div>
+                    <div class="column-1">
+                        <img src="../img/jasmine.png" height="200">
+                        <h3 class="margin-top">Jasmine</h3>
+                        <p><small>Fast, batteries included</small></p>
+                    </div>
+                </div>
+                <p><small><a href="https://2018.stateofjs.com/testing/overview/">State of JavaScript - Testing</a></small></p>
+            </section>
+            <section>
+                <h2>Strength of Mocha</h2>
+                <ul>
+                    <li>Maturity and widely adopted<br>
+                        <small>Good IDE and tooling support<br>
+                            Good community
+                        </small>
+                    </li>
+                    <li>Easy learning curve<br>
+                        <small>Zero config required<br>
+                            Clear API, good documentation
+                        </small>
+                    </li>
+                    <li>Flexibility<br>
+                        <small>Not `batteries included'.<br>
+                            Customize the way you want</small>
+                    </li>
+                </ul>
+                <p><small><a href="https://socialdribbler.com/react-testing-library-mocha-vs-jest/">React Testing Library – Mocha vs Jest</a></small></p>
+            </section>
+            <section>
+                <h2>Useful and Cool Tooling for Mocha</h2>
+                <ul>
+                    <li>eslint-plugin-mocha<br>
+                        <small>No more mistake of checking in <span class="code">.only()</span></small>
+                    </li>
+                    <li>mochawesome</li>
+                    <small>Gorgeous HTML/CSS Reporter for Mocha.js</small>
+                    </li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <!-- General rules -->
+            <section>
+                <h3>Test Files structure</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    (root)
+                    ├── docs
+                    ├─┬ src
+                    │ ├─┬ controllers
+                    │ │ ├─┬ controllers
+                    │ │ │ └── FeedController.js
+                    │ ...
+                    ├─┬ tests
+                    │ ├─┬ integration
+                    │ │ ├─┬ controllers
+                    │ │ │ └── FeedControllerSpec.js
+                    │ │ ├── services
+                    │ ...
+                    │ └─┬ unit
+                    │   ├─┬ controllers
+                    │   │ └── FeedControllerSpec.js
+                    │   ├── dao
+                    │ ...
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <!-- Test Structure -->
+            <section>
+                <h2>Common Terms</h2>
+                <p>There are 3 levels in a Mocha test file:</p>
+                <ul>
+                    <li><span class="code">describe</span> function - Test suite for a given function<br>
+                        <small>Follow the same order as they appear in the main class.</small>
+                    </li>
+                    <li><span class="code">context</span> function - Specific scenario for a group of test cases<br>
+                        <small>To logically group test cases to make the test output more readable.</small>
+                    </li>
+                    <li><span class="code">it</span> function - Test case for a specific scenario<br>
+                        <small>Follow code order. Normal scenarios followed by exceptional scenarios.</small>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Code sample</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    describe('LocaleValidator', () => {
+                      describe('sanitize', () => {
+                        it('should return data', async () => {
+                          const locale = ['in', 'tha', 'ind'];
+                          const localeResult = LocaleValidator.sanitize(locale);
+                          assert.deepEqual(['in', 'tha', 'ind'], localeResult);
+                        });
+
+                        it('should return all original locales if they are all valid', async () => {
+                            ...
+                        });
+
+                        it('should filter if invalid locale provided ', async () => {
+                          ...
+                        });
+                      });
+                    });
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Mocha hooks</h2>
+                <p>Make user of the following <span class="code">mocha</span> hooks to consolidate setup/teardown in a block:</p>
+                <ul>
+                    <li><span class="code">before()</span> - Runs once before the first test case</li>
+                    <li><span class="code">beforeEach()</span> - Runs before each test case</li>
+                    <li><span class="code">afterEach()</span> -  Runs after each test case</li>
+                    <li><span class="code">after()</span> - Runs once after the last test case</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <!-- Assertion -->
+            <section>
+                <h2>Assertion Style</h2>
+                <ul>
+                    <li>Only use Use Chai <span class="code">assert</span>, no BDD style assertion, i.e. <span class="code">expect</span>, <span class="code">should</span></li>
+                    <li>When multiple assertions are applicable, preference is to use the more specific one</li>
+                    <li>Use <span class="code">assert(exp)</span> for generic truthy assertions</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Property Assertions</h2>
+                <p>Used to compare 2 objects:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        assert.equal(actual, expected, [message]);
+
+                        assert.notEqual(actual, expected, [message]);
+
+                        assert.strictEqual(actual, expected, [message]);
+
+                        assert.deepEqual(actual, expected, [message]);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Interaction Assertions</h2>
+                <ul>
+                    <li>Assert the invocation of spied/stubbed functions to verify the side effect of the function. Recommend Sinon spy/stub assertions:</li>
+                </ul>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        calledOnceWithExactly/notCalled
+                            - Invoked once only or never invoked
+                        calledTwice/callCount + calledWithExactly()
+                            - Invoke multiple times with different parameters.
+                        calledOnce/calledTwice/callCount
+                            - Only for test cases with multiple assertions.
+                        calledWith(sinon.match(...))
+                            - Used for partial assertion, or type assertion for testing incremental changes.
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <!-- Test Asynchronous Code -->
+            <section>
+                <h2>Test Asynchronous Code</h2>
+                <ul>
+                    <li>Always use <span class="code">async/await</span> instead of promise or callback</li>
+                    <li>The test scenario function should be an <span class="code">async</span> function with one <span class="code">try/catch</span> block at the top-level, with no code outside.</li>
+                    <li><span class="code">try</span> block contains the await statement, and always throws an error.</li>
+                    <li>All assertions (including stub interactions) should be inside the <span class="code">catch</span> block.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Code sample</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    it('should throw error if no argument provided', async () => {
+                      try {
+                        await invalidationService.invalidateBanners();
+                        throw new Error('Expect error to be thrown above');
+                      } catch (error) {
+                        assert.equal(error.name, 'MissingRequestParameter');
+                        assert.equal(error.code, 'DI-1010');
+                        assert.equal(error.message, 'Mandatory request parameter is missing: \'regions\'');
+                        assert(cacheRepositoryDelStub.notCalled);
+                      }
+                    });
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        }
+      }
+    ]
+  });
+</script>
+</body>
+</html>

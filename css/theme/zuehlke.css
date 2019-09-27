@@ -14,7 +14,7 @@
 .reveal .deck-slide {
   text-align: left; }
   .reveal .deck-slide.slide-background {
-    background: url("../../img/bg.jpg"), center, center;
+    background: url("../../img/bg_old.png"), center, center;
     background-size: cover; }
   .reveal .deck-slide h1, .reveal .deck-slide h3 {
     letter-spacing: 0; }
@@ -51,7 +51,7 @@
   min-height: 100px;
   max-width: 200px;
   max-height: 200px;
-  background: url("../../img/zuehlke_logo.jpg");
+  background: url("../../img/hooq_icon.jpg");
   background-size: contain; }
 
 .reveal .slides section {

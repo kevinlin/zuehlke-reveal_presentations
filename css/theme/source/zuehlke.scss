@@ -49,7 +49,7 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
 .reveal {
   .deck-slide {
     &.slide-background {
-      background: url("../../img/bg.jpg"), center, center;
+      background: url("../../img/bg_old.png"), center, center;
       background-size: cover;
     }
 
@@ -101,7 +101,7 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
       min-height: $minLogoSize;
       max-width: $maxLogoSize;
       max-height: $maxLogoSize;
-      background: url('../../img/zuehlke_logo.jpg');
+      background: url('../../img/hooq_icon.jpg');
       background-size: contain;
     }
   }
