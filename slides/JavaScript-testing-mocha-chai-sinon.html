@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -27,12 +27,34 @@
     <div class="slides">
         <section class="deck-slide">
             <h1>JavaScript Testing with <br><small>Mocha, Chai, Sinon</small></h1>
-            <p>Prepared by Kevin and the Discover Team</p>
+            <p>Prepared by Kevin with help from the Discover Team</p>
         </section>
         <section>
-            <h2>General rules of thumbs</h2>
-            <blockquote>#1. A unit test should only fail for a single reason, namely, the application logic under test does not behave as expected.</blockquote>
-            <blockquote>#3. During stubbing/mocking, mock data should contain the minimal amount of data that is required to pass the test.</blockquote>
+            <!-- Why do we write tests? -->
+            <section>
+                <h2>Why do we write tests?</h2>
+                <ul>
+                    <li>Validate code logic against requirement</li>
+                    <li>Help us design our code</li>
+                    <li>Protect us from code refactoring</li>
+                    <li>Enable good development practices, i.e.
+                        <ul>
+                            <li>Test-first development</li>
+                            <li>Test-driven development (TDD)</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section class="img-slide">
+                <h3>The Quality Pipeline</h3>
+                <img src="https://miro.medium.com/max/1275/1*y6LGDGdcvVvE1xzYMSGP0w.jpeg" alt="The Quality Pipeline" />
+                <p><small><a href="https://medium.com/@me_37286/yoni-goldberg-javascript-nodejs-testing-best-practices-2b98924c9347">Node.js & JavaScript Testing Best Practices (2019)</a></small></p>
+            </section>
+            <section>
+                <h2>General rules of thumbs</h2>
+                <blockquote>#1. A unit test should only fail for a single reason, namely, the application logic under test does not behave as expected.</blockquote>
+                <blockquote>#3. During stubbing/mocking, mock data should contain the minimal amount of data that is required to pass the test.</blockquote>
+            </section>
         </section>
         <section>
             <!-- Libraries and tooling -->
@@ -40,17 +62,17 @@
                 <h2>Libraries we use <br><small>for Discover Testing</small></h2>
                 <div class="column-container">
                     <div class="column-1">
-                        <img src="../img/mocha.svg" height="200">
+                        <img src="../img/mocha.svg" height="200" alt="Mocha">
                         <h3 class="margin-top">Mocha</h3>
                         <p><small>Testing framework / test runner</small></p>
                     </div>
                     <div class="column-1">
-                        <img src="../img/chai.png" height="200">
+                        <img src="../img/chai.png" height="200" alt="Chai">
                         <h3 class="margin-top">Chai</h3>
                         <p><small>BDD / TDD assertions</small></p>
                     </div>
                     <div class="column-1">
-                        <img src="../img/sinon.png" height="200">
+                        <img src="../img/sinon.png" height="200" alt="Sinon.js">
                         <h3 class="margin-top">Sinon.js</h3>
                         <p><small>Stubbing, mocking</small></p>
                     </div>
@@ -60,12 +82,12 @@
                 <h2>Alternatives to Mocha</h2>
                 <div class="column-container">
                     <div class="column-1">
-                        <img src="../img/jest.jpg" height="200">
+                        <img src="../img/jest.jpg" height="200" alt="Jest">
                         <h3 class="margin-top">Jest</h3>
                         <p><small>By Facebook, zero-config, support snapshot</small></p>
                     </div>
                     <div class="column-1">
-                        <img src="../img/jasmine.png" height="200">
+                        <img src="../img/jasmine.png" height="200" alt="Jasmine">
                         <h3 class="margin-top">Jasmine</h3>
                         <p><small>Fast, batteries included</small></p>
                     </div>
@@ -98,8 +120,8 @@
                     <li>eslint-plugin-mocha<br>
                         <small>No more mistake of checking in <span class="code">.only()</span></small>
                     </li>
-                    <li>mochawesome</li>
-                    <small>Gorgeous HTML/CSS Reporter for Mocha.js</small>
+                    <li>mochawesome
+                        <small>Gorgeous HTML/CSS Reporter for Mocha.js</small>
                     </li>
                 </ul>
             </section>
