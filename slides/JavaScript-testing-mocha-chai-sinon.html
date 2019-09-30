@@ -61,17 +61,17 @@
             <section>
                 <h2>Libraries we use <br><small>for Discover Testing</small></h2>
                 <div class="column-container">
-                    <div class="column-1">
+                    <div class="column">
                         <img src="../img/mocha.svg" height="200" alt="Mocha">
                         <h3 class="margin-top">Mocha</h3>
                         <p><small>Testing framework / test runner</small></p>
                     </div>
-                    <div class="column-1">
+                    <div class="column">
                         <img src="../img/chai.png" height="200" alt="Chai">
                         <h3 class="margin-top">Chai</h3>
                         <p><small>BDD / TDD assertions</small></p>
                     </div>
-                    <div class="column-1">
+                    <div class="column">
                         <img src="../img/sinon.png" height="200" alt="Sinon.js">
                         <h3 class="margin-top">Sinon.js</h3>
                         <p><small>Stubbing, mocking</small></p>
@@ -81,12 +81,12 @@
             <section>
                 <h2>Alternatives to Mocha</h2>
                 <div class="column-container">
-                    <div class="column-1">
+                    <div class="column">
                         <img src="../img/jest.jpg" height="200" alt="Jest">
                         <h3 class="margin-top">Jest</h3>
                         <p><small>By Facebook, zero-config, support snapshot</small></p>
                     </div>
-                    <div class="column-1">
+                    <div class="column">
                         <img src="../img/jasmine.png" height="200" alt="Jasmine">
                         <h3 class="margin-top">Jasmine</h3>
                         <p><small>Fast, batteries included</small></p>
@@ -108,26 +108,29 @@
                         </small>
                     </li>
                     <li>Flexibility<br>
-                        <small>Not `batteries included'.<br>
+                        <small>Not a `batteries included' framework<br>
                             Customize the way you want</small>
                     </li>
                 </ul>
                 <p><small><a href="https://socialdribbler.com/react-testing-library-mocha-vs-jest/">React Testing Library – Mocha vs Jest</a></small></p>
             </section>
             <section>
-                <h2>Useful and Cool Tooling for Mocha</h2>
+                <h2>Useful (and cool) tooling for Mocha</h2>
                 <ul>
-                    <li>eslint-plugin-mocha<br>
-                        <small>No more mistake of checking in <span class="code">.only()</span></small>
+                    <li><span class="code">nyan</span><br>
+                        <img src="https://thumbs.gfycat.com/ScaryMassiveGallowaycow-small.gif" height="120" alt="nyan">
                     </li>
-                    <li>mochawesome
+                    <li><span class="code">mochawesome</span><br>
                         <small>Gorgeous HTML/CSS Reporter for Mocha.js</small>
+                    </li>
+                    <li><span class="code">eslint-plugin-mocha</span><br>
+                        <small>No more mistake of checking in <span class="code">.only()</span></small>
                     </li>
                 </ul>
             </section>
         </section>
         <section>
-            <!-- General rules -->
+            <!-- File structure & naming -->
             <section>
                 <h3>Test Files structure</h3>
                 <pre>
@@ -172,7 +175,17 @@
                 </ul>
             </section>
             <section>
-                <h2>Code sample</h2>
+                <h2>Mocha hooks</h2>
+                <p>Make user of the following <span class="code">mocha</span> hooks to consolidate setup/teardown in a block:</p>
+                <ul>
+                    <li><span class="code">before()</span> - Runs once before the first test case</li>
+                    <li><span class="code">beforeEach()</span> - Runs before each test case</li>
+                    <li><span class="code">afterEach()</span> -  Runs after each test case</li>
+                    <li><span class="code">after()</span> - Runs once after the last test case</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Code sample</h3>
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape>
                     describe('LocaleValidator', () => {
@@ -195,16 +208,6 @@
                     </code>
                 </pre>
             </section>
-            <section>
-                <h2>Mocha hooks</h2>
-                <p>Make user of the following <span class="code">mocha</span> hooks to consolidate setup/teardown in a block:</p>
-                <ul>
-                    <li><span class="code">before()</span> - Runs once before the first test case</li>
-                    <li><span class="code">beforeEach()</span> - Runs before each test case</li>
-                    <li><span class="code">afterEach()</span> -  Runs after each test case</li>
-                    <li><span class="code">after()</span> - Runs once after the last test case</li>
-                </ul>
-            </section>
         </section>
         <section>
             <!-- Assertion -->
@@ -215,6 +218,43 @@
                     <li>When multiple assertions are applicable, preference is to use the more specific one</li>
                     <li>Use <span class="code">assert(exp)</span> for generic truthy assertions</li>
                 </ul>
+            </section>
+            <section>
+                <h2>Chai - Assert style</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const assert = require('chai').assert;
+                    const numbers = [1, 2, 3, 4, 5];
+
+                    assert.isArray(numbers, 'is array of numbers');
+                    assert.include(numbers, 2, 'array contains 2');
+                    assert.lengthOf(numbers, 5, 'array contains 5 numbers');
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Chai - Expect (BDD) style</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const expect = require('chai').expect;
+                    const numbers = [1, 2, 3, 4, 5];
+
+                    expect(numbers).to.be.an('array').that.includes(2);
+                    expect(numbers).to.have.lengthOf(5);
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Chai - Should (BDD) style</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const should = require('chai').should();
+                    const numbers = [1, 2, 3, 4, 5];
+
+                    numbers.should.be.an('array').that.includes(2);
+                    numbers.should.have.lengthOf(5);
+                    </code>
+                </pre>
             </section>
             <section>
                 <h2>Property Assertions</h2>
@@ -233,19 +273,23 @@
             </section>
             <section>
                 <h2>Interaction Assertions</h2>
-                <ul>
-                    <li>Assert the invocation of spied/stubbed functions to verify the side effect of the function. Recommend Sinon spy/stub assertions:</li>
-                </ul>
+                <small>Assert the invocation of spied/stubbed functions to verify the side effect of the function.</small>
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape>
-                        calledOnceWithExactly/notCalled
-                            - Invoked once only or never invoked
-                        calledTwice/callCount + calledWithExactly()
-                            - Invoke multiple times with different parameters.
-                        calledOnce/calledTwice/callCount
-                            - Only for test cases with multiple assertions.
-                        calledWith(sinon.match(...))
-                            - Used for partial assertion, or type assertion for testing incremental changes.
+                        var stub = sinon.stub(object, "method");
+
+                        // Invoked once only or never invoked
+                        stub.calledOnceWithExactly(...params);
+                        stub.notCalled();
+
+                        // Invoke multiple times with different parameters
+                        stub.calledOnce();
+                        stub.calledTwice();
+                        stub.callCount(x);
+                        stub.calledWithExactly(...params);
+
+                        // Used for partial assertion, or type assertion for testing incremental changes
+                        stub.calledWith(sinon.match(...params));
                     </code>
                 </pre>
             </section>
@@ -262,7 +306,7 @@
                 </ul>
             </section>
             <section>
-                <h2>Code sample</h2>
+                <h3>Code sample</h3>
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape>
                     it('should throw error if no argument provided', async () => {
@@ -276,6 +320,40 @@
                         assert(cacheRepositoryDelStub.notCalled);
                       }
                     });
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <!-- TestRail Integration -->
+            <section>
+                <h2>TestRail Integration</h2>
+                <ul>
+                    <li><span class="code">node-fetch</span> to make HTTP calls, a.k.a curl</li>
+                    <li><span class="code">jsonpath</span> to query response payload</li>
+                    <li><span class="code">testrail-api</span> to invoke TestRail Restful API</li>
+                    <li>In <span class="code">before</span> hook, get existing TestRail run or create new run based on test context</li>
+                    <li>Access <span class="code">currentTest</span> in <span class="code">afterEach</span> hook to get the test status and error msg</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Code sample</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                      afterEach(async function () {
+                        const curTest = _.omit(this.currentTest, ['parent', 'ctx']);
+                        // console.log('afterEach()->currentTest:', curTest);
+                        const status_id = curTest.state === 'passed' ? 1 : 5;
+                        const elapsed = `${curTest.duration}ms`;
+                        const comment = JSON.stringify(_.pick(curTest, ['file', 'state', 'err']), null, 2);
+                        const data = { status_id, version, elapsed, comment };
+                        // console.log(`testrail.addResultForCase()->run_id: ${run_id}, case_id: ${case_id}, data:`, JSON.stringify(data, null, 2));
+                        try {
+                          await testrail.addResultForCase(run_id, case_id, data);
+                        } catch (error) {
+                          console.log('testrail.addResultForCase()->', error.message);
+                        }
+                      });
                     </code>
                 </pre>
             </section>
