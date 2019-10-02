@@ -29,8 +29,7 @@
             <h1>JavaScript Testing with <br><small>Mocha, Chai, Sinon</small></h1>
             <p>Prepared by Kevin with help from the Discover Team</p>
         </section>
-        <section>
-            <!-- Why do we write tests? -->
+        <section><!-- Why do we write tests? -->
             <section>
                 <h2>Why do we write tests?</h2>
                 <ul>
@@ -56,8 +55,7 @@
                 <blockquote>#3. During stubbing/mocking, mock data should contain the minimal amount of data that is required to pass the test.</blockquote>
             </section>
         </section>
-        <section>
-            <!-- Libraries and tooling -->
+        <section><!-- Libraries and tooling -->
             <section>
                 <h2>Libraries we use <br><small>for Discover Testing</small></h2>
                 <div class="column-container">
@@ -129,12 +127,32 @@
                 </ul>
             </section>
         </section>
-        <section>
-            <!-- File structure & naming -->
+        <section><!-- Getting started -->
             <section>
-                <h3>Test Files structure</h3>
+                <h2>Getting started with Mocha</h2>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs sh" data-trim contenteditable data-noescape>
+                        # install globally
+                        npm i --global mocha
+
+                        # add as a development dependency
+                        npm i --save-dev mocha
+
+                        # create test folder and add tests inside...
+                        mkdir test
+
+                        # run tests
+                        mocha
+
+                        # watch for changes in test files and re-run the tests
+                        mocha --watch
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Test Files Structure</h3>
+                <pre>
+                    <code class="hljs sh" data-trim contenteditable data-noescape>
                     (root)
                     ├── docs
                     ├─┬ src
@@ -142,7 +160,7 @@
                     │ │ ├─┬ controllers
                     │ │ │ └── FeedController.js
                     │ ...
-                    ├─┬ tests
+                    ├─┬ test
                     │ ├─┬ integration
                     │ │ ├─┬ controllers
                     │ │ │ └── FeedControllerSpec.js
@@ -157,19 +175,18 @@
                 </pre>
             </section>
         </section>
-        <section>
-            <!-- Test Structure -->
+        <section><!-- Test Structure -->
             <section>
-                <h2>Common Terms</h2>
-                <p>There are 3 levels in a Mocha test file:</p>
+                <h2>Test Structure</h2>
+                <p>There are <span style="text-decoration: line-through;">2</span> / 3 levels in a Mocha test file:</p>
                 <ul>
-                    <li><span class="code">describe</span> function - Test suite for a given function<br>
+                    <li><span class="code">describe()</span> - Test suite for a given function<br>
                         <small>Follow the same order as they appear in the main class.</small>
                     </li>
-                    <li><span class="code">context</span> function - Specific scenario for a group of test cases<br>
+                    <li><span class="code">context()</span> - Alias to <span class="code">describe()</span>, for a specific scenario<br>
                         <small>To logically group test cases to make the test output more readable.</small>
                     </li>
-                    <li><span class="code">it</span> function - Test case for a specific scenario<br>
+                    <li><span class="code">it()</span> - Individual test unit<br>
                         <small>Follow code order. Normal scenarios followed by exceptional scenarios.</small>
                     </li>
                 </ul>
@@ -209,13 +226,12 @@
                 </pre>
             </section>
         </section>
-        <section>
-            <!-- Assertion -->
+        <section><!-- Assertion -->
             <section>
                 <h2>Assertion Style</h2>
                 <ul>
                     <li>Only use Use Chai <span class="code">assert</span>, no BDD style assertion, i.e. <span class="code">expect</span>, <span class="code">should</span></li>
-                    <li>When multiple assertions are applicable, preference is to use the more specific one</li>
+                    <li>When multiple assertions are applicable, use the most explicit one</li>
                     <li>Use <span class="code">assert(exp)</span> for generic truthy assertions</li>
                 </ul>
             </section>
@@ -258,9 +274,11 @@
             </section>
             <section>
                 <h2>Property Assertions</h2>
-                <p>Used to compare 2 objects:</p>
+                <p>Compare actual value against expected:</p>
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        const assert = require('chai').assert;
+
                         assert.equal(actual, expected, [message]);
 
                         assert.notEqual(actual, expected, [message]);
@@ -273,7 +291,7 @@
             </section>
             <section>
                 <h2>Interaction Assertions</h2>
-                <small>Assert the invocation of spied/stubbed functions to verify the side effect of the function.</small>
+                <small>Use Sinon.js to assert the invocation of spied/stubbed functions to verify the side effect</small>
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape>
                         var stub = sinon.stub(object, "method");
@@ -294,8 +312,7 @@
                 </pre>
             </section>
         </section>
-        <section>
-            <!-- Test Asynchronous Code -->
+        <section><!-- Test Asynchronous Code -->
             <section>
                 <h2>Test Asynchronous Code</h2>
                 <ul>
@@ -324,8 +341,7 @@
                 </pre>
             </section>
         </section>
-        <section>
-            <!-- TestRail Integration -->
+        <section><!-- TestRail Integration -->
             <section>
                 <h2>TestRail Integration</h2>
                 <ul>
@@ -356,6 +372,7 @@
                       });
                     </code>
                 </pre>
+                <p>Demo in IDE</p>
             </section>
         </section>
         <section class="deck-slide">
