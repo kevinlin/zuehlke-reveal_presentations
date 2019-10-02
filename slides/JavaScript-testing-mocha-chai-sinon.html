@@ -317,8 +317,8 @@
                 <h2>Test Asynchronous Code</h2>
                 <ul>
                     <li>Always use <span class="code">async/await</span> instead of promise or callback</li>
-                    <li>The test scenario function should be an <span class="code">async</span> function with one <span class="code">try/catch</span> block at the top-level, with no code outside.</li>
-                    <li><span class="code">try</span> block contains the await statement, and always throws an error.</li>
+                    <li>The test function should be an <span class="code">async</span> function with a single <span class="code">try/catch</span> block at the top.</li>
+                    <li><span class="code">try</span> block contains the await statement, and throws an error immediately after if error is expected to be thrown.</li>
                     <li>All assertions (including stub interactions) should be inside the <span class="code">catch</span> block.</li>
                 </ul>
             </section>
